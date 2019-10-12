@@ -70,9 +70,7 @@ class Judger():
 
     #递归检测是否已经有人胜出
     def judgedetail(self,board,x,y,chess,flag,direction):
-        if x==-1 or y==-1 or x==16 or y== 16:
-            print("到边界了")
-            print(flag)
+        if x<=-1 or y<=-1 or x>=15 or y>= 15:
             return flag
         if direction==1:
             if board[x][y]==0:
@@ -160,7 +158,6 @@ class Runner():
                 # 根据事件的类型，进行判断
                 if event.type == pygame.QUIT:
                     return True
-
                 elif event.type == pygame.KEYUP:
                     pass
                 # pygame.MOUSEBUTTONDOWN表示鼠标的键被按下
@@ -169,6 +166,8 @@ class Runner():
                     # 将鼠标的(x, y)窗口坐标，转化换为棋盘上的坐标
                     column = round((x - board.rate) / board.rate)#四舍五入转换
                     row= round((y - board.rate) / board.rate)
+                    if column<0 or row<0 or column>14 or row>14:
+                        continue
                     if is_black:
                         chess=Chess(black_color,(column,row))
                     else:
@@ -184,7 +183,6 @@ class Runner():
                                 print("白棋赢了")
                             else:
                                 print("黑棋赢了")
-                            time.sleep(3)
                             return False
 
 
